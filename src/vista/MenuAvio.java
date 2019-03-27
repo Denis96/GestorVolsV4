@@ -35,7 +35,23 @@ public class MenuAvio {
         
     */
     public MenuAvio() {
+        frame = new JFrame("Menú Avió");
+        frame.setSize(AMPLADA,ALCADA);
         
+        frame.setLayout(new GridLayout(0, 1)); // Grid d'una columna
+        
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        menuButtons[0] = new JButton("0. Sortir");
+        menuButtons[1] = new JButton("1. Alta");
+        menuButtons[2] = new JButton("2. Modificar");
+        menuButtons[4] = new JButton("3. Llistar avions");
+        
+        for (int i = 0; i < menuButtons.length; i++) {
+            frame.add(menuButtons[i]);
+        }
+        
+        frame.setVisible(true);
     }
 
     public JFrame getFrame() {

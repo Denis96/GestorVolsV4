@@ -1,5 +1,6 @@
 package vista;
 
+import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -32,7 +33,22 @@ public class MenuPrincipal {
         
     */ 
     public MenuPrincipal() {
+        frame = new JFrame("Menú Principal");
+        frame.setSize(AMPLADA,ALCADA);
         
+        frame.setLayout(new GridLayout(0, 1)); // Grid d'una columna
+        
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        menuButtons[0] = new JButton("0. Sortir");
+        menuButtons[1] = new JButton("1. Menú Companyia");
+        menuButtons[2] = new JButton("2. Menú Avio");
+        
+        for (int i = 0; i < menuButtons.length; i++) {
+            frame.add(menuButtons[i]);
+        }
+        
+        frame.setVisible(true);
     }
 
     public JFrame getFrame() {
