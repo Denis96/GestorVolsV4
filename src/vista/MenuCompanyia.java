@@ -44,17 +44,19 @@ public class MenuCompanyia {
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        menuButtons[0] = new JButton("Sortir");
-        menuButtons[1] = new JButton("Alta");
-        menuButtons[2] = new JButton("Seleccionar");
-        menuButtons[3] = new JButton("Seleccionar");
-        menuButtons[4] = new JButton("Llistar companyies");
-        menuButtons[5] = new JButton("Carregar companyia");
-        menuButtons[6] = new JButton("Desar companyia");
+        menuButtons[0] = new JButton("0. Sortir");
+        menuButtons[1] = new JButton("1. Alta");
+        menuButtons[2] = new JButton("2. Seleccionar");
+        menuButtons[3] = new JButton("3. Seleccionar");
+        menuButtons[4] = new JButton("4. Llistar companyies");
+        menuButtons[5] = new JButton("5. Carregar companyia");
+        menuButtons[6] = new JButton("6. Desar companyia");
         
         for (int i = 0; i < menuButtons.length; i++) {
             frame.add(menuButtons[i]);
         }
+        
+        frame.setVisible(true);
     }
 
     public JFrame getFrame() {
