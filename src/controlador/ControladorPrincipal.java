@@ -32,7 +32,12 @@ public class ControladorPrincipal implements ActionListener {
     mètode actionPerformed, està implementat en aquesta classe.
      */
     public ControladorPrincipal() {
-
+        menuPrincipal = new MenuPrincipal();
+        
+        for (int i = 0; i < menuPrincipal.getMenuButtons().length; i++){
+            menuPrincipal.getMenuButtons()[i].addActionListener(this);
+        }
+        
     }
 
     /*  
@@ -42,7 +47,8 @@ public class ControladorPrincipal implements ActionListener {
     Retorn: cap
      */
     public void actionPerformed(ActionEvent e) {
-
+        //Object gestorEsdeveniments = e.getSource();
+        seleccionarOpcio();
     }
 
     private void seleccionarOpcio(int opcio) {
