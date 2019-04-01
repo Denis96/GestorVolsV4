@@ -1,6 +1,7 @@
 package controlador;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import model.Avio;
 import vista.FormAvio;
 import vista.LlistatAvions;
@@ -25,7 +26,8 @@ public class ControladorAvio {
     - Es crida a afegirListenersMenu
      */
     public ControladorAvio() {
-
+        menuAvio = new MenuAvio();
+        afegirListenersMenu();
     }
 
     /*  
@@ -35,7 +37,10 @@ public class ControladorAvio {
     Retorn: cap
      */
     private void afegirListenersMenu() {
-
+        menuAvio.getMenuButtons()[0].addActionListener((ActionListener) this);
+        menuAvio.getMenuButtons()[1].addActionListener((ActionListener) this);
+        menuAvio.getMenuButtons()[2].addActionListener((ActionListener) this);
+        menuAvio.getMenuButtons()[3].addActionListener((ActionListener) this);
     }
 
     /*  
@@ -45,7 +50,8 @@ public class ControladorAvio {
     Retorn: cap
      */
     private void afegirListenersForm() {
-
+        formAvio.getSortir().addActionListener((ActionListener) this);
+        formAvio.getDesar().addActionListener((ActionListener) this);
     }
 
     /*  
@@ -55,7 +61,7 @@ public class ControladorAvio {
     Retorn: cap
      */
     private void afegirListenersLlistat() {
- 
+        llistatAvions.getSortir().addActionListener((ActionListener) this);
     }
 
     /*  
@@ -74,7 +80,7 @@ public class ControladorAvio {
     Retorn: avió seleccionat de la companyia actual.
      */
     private Avio seleccionarAvio() {
-
+        
 
     }
 

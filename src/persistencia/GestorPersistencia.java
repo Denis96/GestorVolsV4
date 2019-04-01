@@ -34,7 +34,7 @@ public class GestorPersistencia {
         gestor.desarDades(nomFitxer, companyia);
     }
 
-    public void carregarRestaurant(String tipusPersistencia, String nomFitxer) throws ParseException, GestioVolsExcepcio {
+    public void carregarCompanyia(String tipusPersistencia, String nomFitxer) throws ParseException, GestioVolsExcepcio {
 
         switch (tipusPersistencia) {
 
