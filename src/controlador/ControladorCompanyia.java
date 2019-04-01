@@ -2,7 +2,9 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import vista.FormCompanyia;
 import vista.LlistatCompanyies;
 import vista.MenuCompanyia;
@@ -26,7 +28,8 @@ public class ControladorCompanyia implements ActionListener {
     - Es crida a afegirListenersMenu
      */
     public ControladorCompanyia() {
-
+		menuCompanyia = new MenuCompanyia();
+		afegirListenersMenu();
     }
 
     /*  
@@ -36,7 +39,9 @@ public class ControladorCompanyia implements ActionListener {
     Retorn: cap
      */
     private void afegirListenersMenu() {
- 
+        for (int i = 0; i < menuCompanyia.getMenuButtons().length; i++) {
+			menuCompanyia.getMenuButtons()[i].addActionListener(this);
+        }
     }
 
     /*  
@@ -46,7 +51,8 @@ public class ControladorCompanyia implements ActionListener {
     Retorn: cap
      */
     private void afegirListenersForm() {
-      
+		formCompanyia.getDesar().addActionListener(this);
+		formCompanyia.getSortir().addActionListener(this);
     }
 
     /*  
@@ -56,7 +62,7 @@ public class ControladorCompanyia implements ActionListener {
     Retorn: cap
      */
     private void afegirListenersLlistat() {
-       
+       llistatCompanyies.getSortir().addActionListener(this);
     }
 
     /*  
@@ -64,7 +70,7 @@ public class ControladorCompanyia implements ActionListener {
     
     Acció: 
     - S'ha de mostrar a l'usuari un JPane perquè l'usuari pugui seleccionar una de les companyies
-    guardades en el vector de companyies del ControladorPrincipal.
+    guardades en el vector de opcioSeleccionada = 0; del ControladorPrincipal.
     - Per seleccionar les companyies, l'usuari ha de disposar en el JPane d'un botó amb el codi
     de cadascuna de les companyies, amb el missatge "Selecciona una companyia", el títol "Seleccionar 
     companyia" i la icona de qüestió.
@@ -76,8 +82,25 @@ public class ControladorCompanyia implements ActionListener {
     Retorn: cap
      */
     private void seleccionarCompanyia() {
-
+        Object[] codis = new Object[ControladorPrincipal.getMAXCOMPANYIES()];
+		
+        for (int i = 0; i < codis.length; i++) {
+			codis[i] = ControladorPrincipal.getCompanyies()[i].getCodi();
+        }
+		
+        opcioSeleccionada = JOptionPane.showOptionDialog(
+				null,
+				"Selecciona una companyia",
+				"Seleccionar companyia",
+				JOptionPane.DEFAULT_OPTION,
+				JOptionPane.QUESTION_MESSAGE,
+				null,
+				codis, -1
+			);
         
+        if (opcioSeleccionada > -1){
+            ControladorPrincipal.setCompanyiaActual(ControladorPrincipal.getCompanyies()[opcioSeleccionada]);
+        }
     }
 
     /*  
@@ -91,7 +114,17 @@ public class ControladorCompanyia implements ActionListener {
     Retorn: Verdader si s'ha introduït el nom. Fals en cas contrari.
      */
     private Boolean validarCompanyia() {
-        
+        if (formCompanyia.gettNom().getText().isEmpty()){
+            JOptionPane.showMessageDialog(
+					null, 
+					"S'ha d'introduir el nom",
+					"ATENCIÓ!!!", 
+					JOptionPane.WARNING_MESSAGE
+				);
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /*
@@ -190,7 +223,7 @@ public class ControladorCompanyia implements ActionListener {
                     afegirListenersLlistat();
                 } else {
                     menuCompanyia.getFrame().setVisible(true);
-                    JOptionPane.showMessageDialog(menuCCompanyia.getFrame(), "Abans s'ha de crear al menys una companyia", "Avís", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(menuCompanyia.getFrame(), "Abans s'ha de crear al menys una companyia", "Avís", JOptionPane.PLAIN_MESSAGE);
                 }
                 break;
             case 5: //Desar contingut
