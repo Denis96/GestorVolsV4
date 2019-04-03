@@ -81,8 +81,42 @@ public class ControladorAvio {
     Retorn: avió seleccionat de la companyia actual.
      */
     private Avio seleccionarAvio() {
+		int mida = 0;
+        for (int i = 0; i < ControladorPrincipal.getCompanyiaActual().getComponents().size() ; i++) {
+			if (ControladorPrincipal.getCompanyiaActual().getComponents().get(i) instanceof Avio) {
+				mida++;
+			}
+        }
+		
+        Object[] codis = new Object[mida];
+		
+        for (int i = 0; i < codis.length; i++) {
+			codis[i] = ((Avio)(ControladorPrincipal.getCompanyiaActual().getComponents().get(i))).getCodi();
+        }
+		
+        opcioSeleccionada = JOptionPane.showOptionDialog(
+				null,
+				"Selecciona una companyia",
+				"Seleccionar companyia",
+				JOptionPane.DEFAULT_OPTION,
+				JOptionPane.QUESTION_MESSAGE,
+				null,
+				codis, -1
+			);
         
-
+        if (opcioSeleccionada > -1) {
+			int count = 0;
+			for (int i = 0; i < ControladorPrincipal.getCompanyiaActual().getComponents().size() ; i++) {
+				if (ControladorPrincipal.getCompanyiaActual().getComponents().get(i) instanceof Avio) {
+					if ( count == opcioSeleccionada ) {
+						return (Avio) ControladorPrincipal.getCompanyiaActual().getComponents().get(count);
+					} else {
+						count++;
+					}
+				}
+			}
+        }
+		return null;
     }
 
     /*  

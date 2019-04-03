@@ -150,19 +150,21 @@ public class ControladorCompanyia implements ActionListener {
             Si el botó premut per l'usuari és el botó de desar, llavors:
                 Si l'opció seleccionada en el menú companyia és 1 (alta), llavors:
                     Es validen les dades mitjançant el mètode validarCompanyia():
-                       Si no són correctes, validarCompanyia() mostrarà l'avís corresponent (penseu que no heu de fer res, ja que
-                       és el mètode el que mostra l'avis directament)
-                       Si són correctes:
-                        - Es crea un nou objecte Companyia amb les dades del formulari
-                        - S'afegeix la companyia creada al vector companyies del ControladorPrincipal(recordeu actualitzar posicioCompanyes un cop afegida)
-                        - S'assigna al camp de text corresponent al codi, el codi de la nova companyia.
-                        - S'assigna aquesta companyia, com a companyiaActual (del ControladorPrincipal) i es canvia l'atribut
-                          opcioSeleccionada a 2 per seleccionar la companyia actual.
+						Si no són correctes, validarCompanyia() mostrarà l'avís corresponent (penseu que no heu de fer res,
+						ja que és el mètode el que mostra l'avis directament)
+						Si són correctes:
+							- Es crea un nou objecte Companyia amb les dades del formulari
+							- S'afegeix la companyia creada al vector companyies del ControladorPrincipal
+								(recordeu actualitzar posicioCompanyes un cop afegida)
+							- S'assigna al camp de text corresponent al codi, el codi de la nova companyia.
+							- S'assigna aquesta companyia, com a companyiaActual (del ControladorPrincipal)
+								i es canvia l'atribut opcioSeleccionada a 2 per seleccionar la companyia actual.
                 Si l'opció seleccionada en el menú companyia és 3 (modificar), llavors:
                     Es validen les dades mitjançant el mètode validarCompanyia():
                        Si no són correctes, validarCompanyia() mostrarà un missatge (No heu de fer res, ja ho fa validarCompanyia())
                        Si són correctes:
-                        - Es modifica l'objecte companyia amb les dades introduides mitjançant el formulari (penseu que en aquests moments, la companyia és la companyia actual)
+                        - Es modifica l'objecte companyia amb les dades introduides mitjançant el formulari
+							(penseu que en aquests moments, la companyia és la companyia actual)
         
         ---- SORTIR ----
             Si el botó premut per l'usuari és el botó de sortir del formulari, llavors:
@@ -177,7 +179,20 @@ public class ControladorCompanyia implements ActionListener {
         Retorn: cap
      */
     public void actionPerformed(ActionEvent e) {
-        
+		Object gestorEsdeveniments = e.getSource();
+		if ( ( formCompanyia != null ) && ( llistatCompanyies != null ) ) {
+			
+			boolean search = false;
+			for ( int i = 0 ; ( i < menuCompanyia.getMenuButtons().length ) && !search ; i++ ) {
+				
+				if ( gestorEsdeveniments.equals( menuCompanyia.getMenuButtons()[i] ) ) {
+					search = true;
+					seleccionarOpcio(i);
+				}
+				
+			}
+		}
+		
     }
 
     private void seleccionarOpcio(int opcio) {
