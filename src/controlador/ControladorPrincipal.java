@@ -47,8 +47,15 @@ public class ControladorPrincipal implements ActionListener {
     Retorn: cap
      */
     public void actionPerformed(ActionEvent e) {
-        //Object gestorEsdeveniments = e.getSource();
-        seleccionarOpcio();
+        Object gestorEsdeveniments = e.getSource();
+		
+		if ( gestorEsdeveniments.equals( menuPrincipal.getMenuButtons()[0] ) ) {
+			seleccionarOpcio(0);
+		} else if ( gestorEsdeveniments.equals( menuPrincipal.getMenuButtons()[1] ) ) {
+			seleccionarOpcio(1);
+		} else if ( gestorEsdeveniments.equals( menuPrincipal.getMenuButtons()[2] ) ) {
+			seleccionarOpcio(2);
+		}
     }
 
     private void seleccionarOpcio(int opcio) {
