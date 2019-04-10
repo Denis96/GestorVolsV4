@@ -97,12 +97,34 @@ public class GestorJDBC implements ProveedorPersistencia {
     public void desarDades(String nomFitxer, Companyia companyia) throws GestioVolsExcepcio {
         int codi = Integer.parseInt(nomFitxer);
         
-        String query = "INSERT INTO COMPANYIES "+"(CODI, NOM) VALUES "+"(?,?)";
+        String queryInsertCompanyia = "INSERT INTO COMPANYIES "+"(CODI, NOM) VALUES "+"(?,?)";
+        String queryComprovarCompanyia = "SELECT * FROM COMPANYIES WHERE CODI = "+companyia.getCodi();
+        String queryUpdateCompanyia = "UPDATE COMPANYIES SET CODI = ? WHERE CODI = "+companyia.getCodi();
         
         
-                try {
-            //Connection dbConnection = getDBConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
+        String queryInsertAvions = "INSERT INTO AVIONS "+"(CODI, FABRICANT, MODEL, CAPACITAT, CODICOMPANYIA) VALUES "+"(?,?,?,?,?,?)";
+        String queryDeleteAvions = "DELETE FROM AVIONS WHERE CODICOMPANYIA = "+companyia.getCodi();
+        String queryInsertAvionsAfterDelete = "INSERT INTO AVIONS "+"(CODI, FABRICANT, MODEL, CAPACITAT, CODICOMPANYIA) VALUES "+"(?,?,?,?,?,?)";
+        //companyia.getComponents().
+        
+        
+        
+        
+        try {
+            PreparedStatement comprovarCompanyia = conn.prepareStatement(queryComprovarCompanyia);
+            comprovarCompanyia.execute();
+            if (comprovarCompanyia != null){
+                PreparedStatement updateCompanyia = conn.prepareStatement(queryUpdateCompanyia);
+                updateCompanyia.setInt(1, codi);
+
+                // Borra los aviones
+                PreparedStatement deleteAvions = conn.prepareStatement(queryDeleteAvions);
+                deleteAvions.execute();
+
+
+            }
+                    
+            PreparedStatement preparedStatement = conn.prepareStatement(queryInsertCompanyia);
 
             preparedStatement.setInt(1, codi);
             preparedStatement.setString(2, companyia.getNom());
@@ -113,9 +135,9 @@ public class GestorJDBC implements ProveedorPersistencia {
 
             System.out.println("Record is inserted into COMPANYIES table!");
 
-        } catch (SQLException e) {
+            } catch (SQLException e) {
 
-            System.out.println(e.getMessage());
+                System.out.println(e.getMessage());
 
         }
     }
@@ -142,7 +164,18 @@ public class GestorJDBC implements ProveedorPersistencia {
      */
     @Override
     public Companyia carregarDades(String nomFitxer) throws ParseException, GestioVolsExcepcio {
-
+         int codi = Integer.parseInt(nomFitxer);
+         
+         String queryComprovarCompanyia = "SELECT * FROM COMPANYIES WHERE CODI = "+codi;
+         
+         try {
+             PreparedStatement comprovarCompanyia = conn.prepareStatement(queryComprovarCompanyia);
+             comprovarCompanyia.execute();
+             
+         } catch (SQLException e) {
+             
+         }
+         
     
     }
 }
