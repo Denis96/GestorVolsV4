@@ -129,7 +129,17 @@ public class ControladorAvio {
     Retorn: Verdader si s'han introduït totes les dades. Fals en cas contrari.
      */
     private Boolean validarAvio() {
-
+        if (formAvio.gettFabricant().getText().isEmpty() || formAvio.gettCapacitat().getText().isEmpty() || formAvio.gettModel().getText().isEmpty()){
+            JOptionPane.showMessageDialog(
+					null, 
+					"S'ha d'introduir dades a tots els camps",
+					"ATENCIÓ!!!", 
+					JOptionPane.WARNING_MESSAGE
+				);
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /*
