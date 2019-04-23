@@ -173,6 +173,7 @@ public class GestorJDBC implements ProveedorPersistencia {
              comprovarCompanyia.execute();
              
          } catch (SQLException e) {
+            throw new GestioVolsExcepcio("GestorJDBC.carrega");
              
          }
          
