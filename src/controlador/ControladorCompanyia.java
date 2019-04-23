@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Companyia;
 import vista.FormCompanyia;
 import vista.LlistatCompanyies;
 import vista.MenuCompanyia;
@@ -180,18 +181,49 @@ public class ControladorCompanyia implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
 		Object gestorEsdeveniments = e.getSource();
-		if ( ( formCompanyia != null ) && ( llistatCompanyies != null ) ) {
+		
+		
+        if (gestorEsdeveniments.equals(menuCompanyia.getMenuButtons())) {
 			
 			boolean search = false;
 			for ( int i = 0 ; ( i < menuCompanyia.getMenuButtons().length ) && !search ; i++ ) {
-				
 				if ( gestorEsdeveniments.equals( menuCompanyia.getMenuButtons()[i] ) ) {
 					search = true;
 					seleccionarOpcio(i);
 				}
-				
 			}
-		}
+			
+		} else if (gestorEsdeveniments.equals(formCompanyia.getDesar())){
+			
+            if (opcioSeleccionada == 1){
+                if (validarCompanyia() == true){
+                    Companyia nCompanyia = new Companyia(formCompanyia.gettNom().getText());
+                    ControladorPrincipal.getCompanyies()[ControladorPrincipal.getPosicioCompanyies()] = nCompanyia;
+                    ControladorPrincipal.setPosicioCompanyies(ControladorPrincipal.getPosicioCompanyies()+1);
+                    ControladorPrincipal.setCompanyiaActual(nCompanyia);
+                    opcioSeleccionada = 2;
+                }
+            } else if (opcioSeleccionada == 3){
+               if (validarCompanyia() == true){
+                    Companyia nCompanyia = new Companyia(formCompanyia.gettNom().getText());
+                    ControladorPrincipal.getCompanyies()[ControladorPrincipal.getPosicioCompanyies()] = nCompanyia;
+                    ControladorPrincipal.setPosicioCompanyies(ControladorPrincipal.getPosicioCompanyies()+1);
+                    ControladorPrincipal.setCompanyiaActual(nCompanyia);
+                    opcioSeleccionada = 2;
+                } 
+            }
+			
+        } else if (gestorEsdeveniments.equals(formCompanyia.getSortir())){
+			
+            formCompanyia.getFrame().setVisible(false);
+            menuCompanyia.getFrame().setVisible(true);
+			
+        } else if (gestorEsdeveniments.equals(llistatCompanyies.getSortir())){
+			
+            llistatCompanyies.getFrame().setVisible(false);
+            menuCompanyia.getFrame().setVisible(true);
+			
+        }
 		
     }
 
